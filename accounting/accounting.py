@@ -15,9 +15,11 @@ current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader(
+    "data_manager", current_file_path + "/../data_manager.py").load_module()
 # common module
-common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
+common = SourceFileLoader(
+    "common", current_file_path + "/../common.py").load_module()
 
 
 # start this module by a module menu like the main menu
@@ -45,6 +47,13 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
+    id = common.generate_random(table)
+    list_labels = ["month", "day", "year", "type", "amount"]
+    title = "Enter the details"
+    inputs = []
+    inputs = ui.get_inputs(list_labels, title)
+    inputs.insert(0, id)
+    table.append(inputs)
 
     # your code
 
