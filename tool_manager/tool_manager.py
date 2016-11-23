@@ -65,9 +65,15 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-    print('Kula')
+    id = common.generate_random(table)
+    list_labels = ["name", "manufacturer", "purchase date", "durability"]
+    title = "Enter the details"
+    inputs = []
+    inputs = ui.get_inputs(list_labels, title)
+    inputs.insert(0, id)
+    table.append(inputs)
     start_module()
-    # your code
+   
 
     return table
 
