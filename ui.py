@@ -43,7 +43,12 @@ def print_result(result, label):
 # @list_options: list of strings - the options in the menu
 # @exit_message: string - the last option with (0) (example: "Back to main menu")
 def print_menu(title, list_options, exit_message):
-
+    counter = 0
+    print(title, ':')
+    for item in list_options:
+        counter += 1
+        print('(', counter, ')', item)
+    print('( 0 )', 'Exit')
     # your code
 
     pass
@@ -61,6 +66,7 @@ def get_inputs(list_labels, title):
         label = label + " : "
         usr_in = input(label)
         inputs.append(usr_in)
+
     return inputs
 
 
@@ -72,7 +78,3 @@ def print_error_message(message):
     # your code
 
     pass
-list_labels = ["halal", "fika", "igen", "nem"]
-title = "Bazmeg"
-inputs = get_inputs(list_labels, title)
-print (inputs)

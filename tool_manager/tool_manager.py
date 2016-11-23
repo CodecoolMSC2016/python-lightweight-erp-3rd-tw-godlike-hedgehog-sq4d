@@ -24,7 +24,27 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
+    table = data_manager.get_table_from_file('tool_manager/tools.csv')
+    title = 'Tool manager'
+    tool_manager_options = ['Show table','Add','Remove','Update','Get available tools','Get average durability by manufacturers']
+    ui.print_menu(title, tool_manager_options, 'Back to main menu')
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id_)
+    elif option == "4":
+        update(table, id_)
+    elif option == "5":
+        get_available_tools(table)
+    elif option == "6":
+        get_average_durability_by_manufacturers(table)
+    elif option == "0":
+        return
+    
     # you code
 
     pass
@@ -34,7 +54,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
+    print('Fika')
+    start_module()
     # your code
 
     pass
@@ -44,7 +65,8 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-
+    print('Kula')
+    start_module()
     # your code
 
     return table
@@ -96,3 +118,5 @@ def get_average_durability_by_manufacturers(table):
     # your code
 
     pass
+
+#start_module()
