@@ -27,6 +27,27 @@ common = SourceFileLoader(
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
+    table = data_manager.get_table_from_file('accounting/items.csv')
+    title = 'Accounting'
+    tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
+                            'Most profitable year', 'Average profit of an item per year']
+    ui.print_menu(title, tool_manager_options, 'Back to main menu')
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id_)
+    elif option == "4":
+        update(table, id_)
+    elif option == "5":
+        which_year_max(table)
+    elif option == "6":
+        avg_amount(table)
+    elif option == "0":
+        return
 
     # you code
 
@@ -54,7 +75,6 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title)
     inputs.insert(0, id)
     table.append(inputs)
-
     # your code
 
     return table
