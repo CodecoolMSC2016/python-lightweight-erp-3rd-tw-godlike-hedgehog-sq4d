@@ -44,8 +44,7 @@ def start_module():
         get_average_durability_by_manufacturers(table)
     elif option == "0":
         return
-    
-    # you code
+
 
     pass
 
@@ -55,7 +54,8 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     print('Fika')
-    start_module()
+    print(table)
+
     # your code
 
     pass
@@ -72,7 +72,9 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title)
     inputs.insert(0, id)
     table.append(inputs)
-    #start_module()
+    data_manager.write_table_to_file('faszomtudjami.csv', table)
+
+
    
     return table
 
