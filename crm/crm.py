@@ -13,9 +13,11 @@ current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader(
+    "data_manager", current_file_path + "/../data_manager.py").load_module()
 # common module
-common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
+common = SourceFileLoader(
+    "common", current_file_path + "/../common.py").load_module()
 
 
 # start this module by a module menu like the main menu
@@ -25,7 +27,8 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 def start_module():
     table = data_manager.get_table_from_file("crm/customers.csv")
     title = "Customer Relationship Management (CRM)"
-    tool_manager_options = ["Show table","Add","Remove","Update","Get longest name id", "Get subscribed emails"]
+    tool_manager_options = ["Show table", "Add", "Remove",
+                            "Update", "Get longest name id", "Get subscribed emails"]
     ui.print_menu(title, tool_manager_options, 'Back to main menu')
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
@@ -34,13 +37,16 @@ def start_module():
     elif option == "2":
         add(table)
     elif option == "3":
-        remove(table, id_)
+        list_labels = ['Add an id you want to remove: ']
+        inputs = ui.get_inputs(list_labels, '')
+        remove(table, inputs)
     elif option == "4":
         update(table, id_)
     elif option == "5":
-        get_longest_name_id(table)
+        get_lowest_price_item_id(table)
     elif option == "6":
-        get_subscribed_emails(table)
+        get_items_sold_between(table, month_from, day_from,
+                               year_from, month_to, day_to, year_to)
     elif option == "0":
         return
 
@@ -70,8 +76,7 @@ def add(table):
     inputs.insert(0, id)
     table.append(inputs)
     data_manager.write_table_to_file("teszt.csv", table)
-    
-   
+
     return table
 
 
@@ -80,12 +85,11 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
- for nested_list in table:
+    for nested_list in table:
         if id_ == nested_list[0]:
             table.remove(nested_list)
     data_manager.write_table_to_file('faszomtudjami.csv', table)
     return table
-    
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -105,7 +109,8 @@ def update(table, id_):
 
 
 # the question: What is the id of the customer with the longest name ?
-# return type: string (id) - if there are more than one longest name, return the first of descending alphabetical order
+# return type: string (id) - if there are more than one longest name,
+# return the first of descending alphabetical order
 def get_longest_name_id(table):
 
     # your code
@@ -114,7 +119,8 @@ def get_longest_name_id(table):
 
 
 # the question: Which customers has subscribed to the newsletter?
-# return type: list of string (where string is like email+separator+name, separator=";")
+# return type: list of string (where string is like email+separator+name,
+# separator=";")
 def get_subscribed_emails(table):
 
     # your code
