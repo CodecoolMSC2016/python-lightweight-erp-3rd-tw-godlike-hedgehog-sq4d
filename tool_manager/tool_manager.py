@@ -37,6 +37,7 @@ def start_module():
     elif option == "3":
         list_labels = ['Add an id you want to remove: ']
         inputs = ui.get_inputs(list_labels,'')
+        inputs = inputs[0]
         remove(table, inputs)
     elif option == "4":
         update(table, id_)
@@ -89,10 +90,8 @@ def remove(table, id_):
     #inputs = ui.get_inputs(list_labels,'')
     for nested_list in table:
         if id_ == nested_list[0]:
-            del table[nested_list]
-    print(table)
-    # your code
-
+            table.remove(nested_list)
+    data_manager.write_table_to_file('faszomtudjami.csv', table)
     return table
 
 
