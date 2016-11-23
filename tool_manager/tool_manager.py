@@ -26,27 +26,34 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 def start_module():
     table = data_manager.get_table_from_file('tool_manager/tools.csv')
     title = 'Tool manager'
-    tool_manager_options = ['Show table','Add','Remove','Update','Get available tools','Get average durability by manufacturers']
-    ui.print_menu(title, tool_manager_options, 'Back to main menu')
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        list_labels = ['Add an id you want to remove: ']
-        inputs = ui.get_inputs(list_labels,'')
-        inputs = inputs[0]
-        remove(table, inputs)
-    elif option == "4":
-        update(table, id_)
-    elif option == "5":
-        get_available_tools(table)
-    elif option == "6":
-        get_average_durability_by_manufacturers(table)
-    elif option == "0":
-        return
+    while True:
+        tool_manager_options = ['Show table','Add','Remove','Update','Get available tools','Get average durability by manufacturers']
+        ui.print_menu(title, tool_manager_options, 'Back to main menu')
+    
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            list_labels = ['Add an id you want to remove: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            remove(table, inputs)
+        elif option == "4":
+            list_labels = ['Add an id you want to update: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            update(table, inputs)
+        elif option == "5":
+            get_available_tools(table)
+        elif option == "6":
+            get_average_durability_by_manufacturers(table)
+        elif option == "0":
+            break
+    return
+    
 
 
     pass
@@ -86,8 +93,6 @@ def add(table):
 # @id_: string
 
 def remove(table, id_):
-    #list_labels = ['Add an id you want to remove: ']
-    #inputs = ui.get_inputs(list_labels,'')
     for nested_list in table:
         if id_ == nested_list[0]:
             table.remove(nested_list)
@@ -101,9 +106,13 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-
-    # your code
-
+    for nested_list in table:
+        if id_ == nested_list[0]:
+            element = ui.get_inputs(['Which elements index you want to modify: '] ,'')
+            element = int(element[0])
+            modification = ui.get_inputs(['Change element: '] ,'')
+            nested_list[element] = modification[0]
+  
     return table
 
 
