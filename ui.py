@@ -56,9 +56,11 @@ def print_menu(title, list_options, exit_message):
 # @inputs: list of string - list of the received values from the user
 def get_inputs(list_labels, title):
     inputs = []
-
-    # your code
-
+    print(title)
+    for label in list_labels:
+        label = label + " : "
+        usr_in = input(label)
+        inputs.append(usr_in)
     return inputs
 
 
@@ -70,3 +72,7 @@ def print_error_message(message):
     # your code
 
     pass
+list_labels = ["halal", "fika", "igen", "nem"]
+title = "Bazmeg"
+inputs = get_inputs(list_labels, title)
+print (inputs)
