@@ -84,7 +84,7 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title, type_list)
     inputs.insert(0, id)
     table.append(inputs)
-    data_manager.write_table_to_file("teszt.csv", table)
+    data_manager.write_table_to_file("crm/customers.csv", table)
 
     return table
 
