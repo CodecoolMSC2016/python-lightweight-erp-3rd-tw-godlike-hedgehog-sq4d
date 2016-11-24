@@ -65,7 +65,7 @@ def print_result(result, label):
         print("")
     if type(result) == str or type(result) == int:
             print("")
-            print(result + '\n')
+            print(result, '\n')
 
     pass
 
