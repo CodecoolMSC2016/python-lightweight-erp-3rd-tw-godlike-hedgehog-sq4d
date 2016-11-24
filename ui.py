@@ -60,10 +60,10 @@ def print_result(result, label):
             print(item)
         print("")
     if type(result) == dict:
-        for key, value in dict.items():
-            print(key + " : " + value)
+        for key, value in result.items():
+            print(key, " : ", value)
         print("")
-    if type(result) == str:
+    if type(result) == str or type(result) == int:
             print("")
             print(result + '\n')
 
@@ -101,6 +101,7 @@ def print_menu(title, list_options, exit_message):
 # @title: string - title of the "input section"
 # @inputs: list of string - list of the received values from the user
 def get_inputs(list_labels, title):
+
     inputs = []
     print(title)
     for label in list_labels:
