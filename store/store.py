@@ -41,13 +41,21 @@ def start_module():
         elif option == "3":
             list_labels = ['Add an id you want to remove: ']
             inputs = ui.get_inputs(list_labels, '')
+            inputs = inputs[0]
             remove(table, inputs)
         elif option == "4":
-            update(table, id_)
+            list_labels = ['Add an id you want to update: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            update(table, inputs)
         elif option == "5":
-            get_counts_by_manufacturers(table)
+            result = get_counts_by_manufacturers(table)
+            ui.print_result(result,'')
         elif option == "6":
-            get_average_by_manufacturer(table, manufacturer)
+            inputs = ui.get_inputs(["Add a manufacturer: "], "")
+            inputs = inputs[0]
+            result = get_average_by_manufacturer(table, inputs)
+            ui.print_result(result,'')
         elif option == "0":
             break
 
@@ -115,8 +123,15 @@ def update(table, id_):
 # the question: How many different kinds of game are available of each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
-
-    # your code
+    manufacture = {}
+    for row in range(len(table)):
+        counter = 0
+        for manufacturer in range(len(table)):
+            if table[manufacturer][2] == table[row][2]:
+                counter +=1
+        manufacture.update({table[row][2]: counter})
+    
+    print(manufacture)
 
     pass
 
@@ -124,7 +139,14 @@ def get_counts_by_manufacturers(table):
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
-
-    # your code
+    amount = 0
+    counter = 0
+    result = 0
+    for row in range(len(table)):
+        if manufacturer == table[row][2]:
+            amount += int(table[row][4])
+            counter += 1 
+    result = amount/counter
+    return result
 
     pass

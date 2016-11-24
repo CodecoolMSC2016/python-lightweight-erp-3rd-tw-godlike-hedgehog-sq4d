@@ -17,7 +17,8 @@ def print_table(table, title_list):
     for item in title_list:
         len_title.append(len(item))
     # az oszlopszélességek meghatározása
-    max_lenght_in_table = [max(len(str(item)) for item in line) for line in zip(*table)]
+    max_lenght_in_table = [max(len(str(item))
+                               for item in line) for line in zip(*table)]
     i = 0
     for i in range(0, len(max_lenght_in_table)):
         if max_lenght_in_table[i] < len_title[i]:
@@ -26,22 +27,24 @@ def print_table(table, title_list):
     table_lenght = 0
     for item in max_lenght_in_table:
         table_lenght += int(item)
-    table_lenght = table_lenght + int(len(title_list))*2
+    table_lenght = table_lenght + int(len(title_list)) * 2
     # tábla rajzolása
-    print("/", "-"*table_lenght, chr(92))
+    print("/", "-" * table_lenght, chr(92))
     for index in range(0, len(title_list)):
-        print("|" + title_list[index].center(max_lenght_in_table[index]+2), end = "")
+        print(
+            "|" + title_list[index].center(max_lenght_in_table[index] + 2), end="")
     print("|")
     for line in table:
         for index in range(0, len(title_list)):
-            print("|" +  "-"*(max_lenght_in_table[index]+2), end = "")
+            print("|" + "-" * (max_lenght_in_table[index] + 2), end="")
         print("|")
         for index in range(0, len(title_list)):
-            print("|" + line[index].center(max_lenght_in_table[index]+2), end = "")
+            print(
+                "|" + line[index].center(max_lenght_in_table[index] + 2), end="")
         print("|")
-    print(chr(92), "-"*table_lenght, "/")
+    print(chr(92), "-" * table_lenght, "/")
     print("\n")
-             
+
     pass
 
 
@@ -50,8 +53,19 @@ def print_table(table, title_list):
 # @result: string or list or dictionary - result of the special function
 # @label: string - label of the result
 def print_result(result, label):
-
-    # your code
+    print("")
+    print(label + '\n')
+    if type(result) == list:
+        for item in result:
+            print(item)
+        print("")
+    if type(result) == dict:
+        for key, value in result.items():
+            print(key, " : ", value)
+        print("")
+    else:
+        print("")
+        print(result, '\n')
 
     pass
 
@@ -87,6 +101,7 @@ def print_menu(title, list_options, exit_message):
 # @title: string - title of the "input section"
 # @inputs: list of string - list of the received values from the user
 def get_inputs(list_labels, title):
+
     inputs = []
     print(title)
     for label in list_labels:
@@ -101,7 +116,5 @@ def get_inputs(list_labels, title):
 #
 # @message: string - the error message
 def print_error_message(message):
-
-    # your code
-
-    pass
+    print(message)
+    return
