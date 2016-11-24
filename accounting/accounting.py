@@ -77,11 +77,6 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title)
     inputs.insert(0, id)
     table.append(inputs)
-<<<<<<< HEAD
-
-=======
->>>>>>> 998bd6a0bfd87c1eae5fe945b8b52effd9567180
-
     return table
 
 
