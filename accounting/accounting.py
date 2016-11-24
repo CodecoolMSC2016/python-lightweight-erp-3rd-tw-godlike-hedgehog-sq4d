@@ -29,10 +29,10 @@ common = SourceFileLoader(
 def start_module():
     table = data_manager.get_table_from_file('accounting/items.csv')
     title = 'Accounting'
-    type_list = ["int"]
     tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
                             'Most profitable year', 'Average profit of an item per year']
     while True:
+        type_list = ["int"]
         ui.print_menu(title, tool_manager_options, 'Back to main menu')
         inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
         option = inputs[0]
@@ -112,9 +112,9 @@ def update(table, id_):
     for nested_list in table:
         if id_ == nested_list[0]:
             element = ui.get_inputs(
-                ['Which elements index you want to modify: '], '')
+                ['Which elements index you want to modify: '], '', type_list)
             element = int(element[0])
-            modification = ui.get_inputs(['Change element: '], '')
+            modification = ui.get_inputs(['Change element: '], '', type_list)
             nested_list[element] = modification[0]
 
     return table

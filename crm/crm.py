@@ -26,11 +26,11 @@ common = SourceFileLoader(
 #
 def start_module():
     table = data_manager.get_table_from_file("crm/customers.csv")
-    type_list = ["int"]
     title = "Customer Relationship Management (CRM)"
     crm_options = ["Show table", "Add", "Remove",
                    "Update", "Get longest name id", "Get subscribed emails"]
     while True:
+        type_list = ["int"]
         ui.print_menu(title, crm_options, 'Back to main menu')
         inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
         option = inputs[0]
