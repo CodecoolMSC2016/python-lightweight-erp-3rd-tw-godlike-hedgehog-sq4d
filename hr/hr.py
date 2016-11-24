@@ -12,9 +12,11 @@ current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader(
+    "data_manager", current_file_path + "/../data_manager.py").load_module()
 # common module
-common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
+common = SourceFileLoader(
+    "common", current_file_path + "/../common.py").load_module()
 
 
 # start this module by a module menu like the main menu
@@ -22,8 +24,28 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-
-    # you code
+    table = data_manager.get_table_from_file('hr/hr.csv')
+    title = 'Human Resources'
+    tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
+                            'Get oldest person', 'Get closest-to-average aged people']
+    while True:
+        ui.print_menu(title, tool_manager_options, 'Back to main menu')
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id_)
+        elif option == "4":
+            update(table, id_)
+        elif option == "5":
+            which_year_max(table)
+        elif option == "6":
+            avg_amount(table)
+        elif option == "0":
+            break
 
     pass
 
@@ -42,8 +64,14 @@ def show_table(table):
 #
 # @table: list of lists
 def add(table):
-
-    # your code
+    id = common.generate_random(table)
+    list_labels = ["name", "birth date"]
+    title = "Enter the details"
+    inputs = []
+    inputs = ui.get_inputs(list_labels, title)
+    inputs.insert(0, id)
+    table.append(inputs)
+    print(table)
 
     return table
 
@@ -53,9 +81,10 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
-
-    # your code
-
+    for nested_list in table:
+        if id_ == nested_list[0]:
+            table.remove(nested_list)
+    data_manager.write_table_to_file('faszomtudjami.csv', table)
     return table
 
 
@@ -65,8 +94,13 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-
-    # your code
+    for nested_list in table:
+        if id_ == nested_list[0]:
+            element = ui.get_inputs(
+                ['Which elements index you want to modify: '], '')
+            element = int(element[0])
+            modification = ui.get_inputs(['Change element: '], '')
+            nested_list[element] = modification[0]
 
     return table
 
@@ -75,7 +109,8 @@ def update(table, id_):
 # ------------------
 
 # the question: Who is the oldest person ?
-# return type: list of strings (name or names if there are two more with the same value)
+# return type: list of strings (name or names if there are two more with
+# the same value)
 def get_oldest_person(table):
 
     # your code
@@ -84,7 +119,8 @@ def get_oldest_person(table):
 
 
 # the question: Who is the closest to the average age ?
-# return type: list of strings (name or names if there are two more with the same value)
+# return type: list of strings (name or names if there are two more with
+# the same value)
 def get_persons_closest_to_average(table):
 
     # your code
