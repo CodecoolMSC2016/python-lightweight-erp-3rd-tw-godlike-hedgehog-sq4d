@@ -54,8 +54,7 @@ def print_table(table, title_list):
 # @result: string or list or dictionary - result of the special function
 # @label: string - label of the result
 def print_result(result, label):
-    print("")
-    print(label + '\n')
+    print(label)
     if type(result) == list:
         for item in result:
             print(item)
