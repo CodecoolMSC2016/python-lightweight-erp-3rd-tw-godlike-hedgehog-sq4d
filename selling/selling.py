@@ -33,26 +33,33 @@ def start_module():
     tool_manager_options = ['Show table', 'Add', 'Remove',
                             'Update', 'Get cheapest item', 'Get sellings between dates']
     while True:
+        type_list = ["int"]
         ui.print_menu(title, tool_manager_options, 'Back to main menu')
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
         option = inputs[0]
         if option == "1":
             show_table(table)
         elif option == "2":
             add(table)
         elif option == "3":
+            type_list = ["str"]
             list_labels = ['Add an id you want to remove']
-            inputs = ui.get_inputs(list_labels, '')
+            inputs = ui.get_inputs(list_labels, '', type_list)
             remove(table, inputs)
         elif option == "4":
-            update(table, id_)
+            list_labels = ['Add an id you want to update: ']
+            type_list = ["str"]
+            inputs = ui.get_inputs(list_labels, '', type_list)
+            inputs = inputs[0]
+            update(table, inputs)
         elif option == "5":
             result = get_lowest_price_item_id(table)
             ui.print_result(result, '')
         elif option == "6":
+            type_list = ["int", "int", "int", "int", "int", "int"]
             list_labels = ['Enter the starting month', 'Enter the starting day', 'Enter the starting year',
                            'Enter the ending month', 'Enter the ending day', 'Enter the ending year']
-            inputs = ui.get_inputs(list_labels, '')
+            inputs = ui.get_inputs(list_labels, '', type_list)
             result = get_items_sold_between(table, inputs[0], inputs[1],
                                             inputs[2], inputs[3], inputs[4], inputs[5])
             ui.print_result(result, '')
@@ -77,13 +84,14 @@ def show_table(table):
 # @table: list of lists
 def add(table):
     id = common.generate_random(table)
+    type_list = ["str", "int", "int", "int", "int"]
     list_labels = ["title", "price", "month", "day", "year"]
     title = "Enter the details"
     inputs = []
-    inputs = ui.get_inputs(list_labels, title)
+    inputs = ui.get_inputs(list_labels, title, type_list)
     inputs.insert(0, id)
     table.append(inputs)
-    data_manager.write_table_to_file('faszomtudjami.csv', table)
+    data_manager.write_table_to_file('selling/sellings.csv', table)
 
     return table
 
@@ -96,7 +104,7 @@ def remove(table, id_):
     for nested_list in table:
         if id_ == nested_list[0]:
             table.remove(nested_list)
-    data_manager.write_table_to_file('faszomtudjami.csv', table)
+    data_manager.write_table_to_file('selling/sellings.csv', table)
     return table
 
 
@@ -106,12 +114,13 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
+    type_list = ["str"]
     for nested_list in table:
         if id_ == nested_list[0]:
             element = ui.get_inputs(
-                ['Which elements index you want to modify: '], '')
+                ['Which elements index you want to modify: '], '', type_list)
             element = int(element[0])
-            modification = ui.get_inputs(['Change element: '], '')
+            modification = ui.get_inputs(['Change element: '], '', type_list)
             nested_list[element] = modification[0]
 
     return table
