@@ -130,7 +130,7 @@ def which_year_max(table):
             max_value = int(value)
     for key, value in years_dict.items():
         if value == max_value:
-            print(key)
+            key = int(key)
             return key
 
 
