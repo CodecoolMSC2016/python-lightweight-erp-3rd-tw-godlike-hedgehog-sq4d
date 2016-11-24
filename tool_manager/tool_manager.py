@@ -34,7 +34,7 @@ def start_module():
                                 'Get available tools', 'Get average durability by manufacturers']
         ui.print_menu(title, tool_manager_options, 'Back to main menu')
 
-        inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
+        inputs = get_submenu_inputs(["Please enter a number: "], "", type_list)
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -43,13 +43,13 @@ def start_module():
         elif option == "3":
             type_list = ["str"]
             list_labels = ['Add an id you want to remove: ']
-            inputs = ui.get_inputs(list_labels, '', type_list)
+            inputs = get_submenu_inputs(list_labels, '', type_list)
             inputs = inputs[0]
             remove(table, inputs)
         elif option == "4":
             type_list = ["str"]
             list_labels = ['Add an id you want to update: ']
-            inputs = ui.get_inputs(list_labels, '', type_list)
+            inputs = get_submenu_inputs(list_labels, '', type_list)
             inputs = inputs[0]
             update(table, inputs)
         elif option == "5":
@@ -83,7 +83,7 @@ def add(table):
     list_labels = ["name", "manufacturer", "purchase date", "durability"]
     title = "Enter the details"
     inputs = []
-    inputs = ui.get_inputs(list_labels, title, type_list)
+    inputs = get_submenu_inputs(list_labels, title, type_list)
     inputs.insert(0, id)
     table.append(inputs)
     data_manager.write_table_to_file('tool_manager/tools.csv', table)
@@ -113,10 +113,11 @@ def update(table, id_):
     type_list = ["str"]
     for nested_list in table:
         if id_ == nested_list[0]:
-            element = ui.get_inputs(
+            element = get_submenu_inputs(
                 ['Which elements index you want to modify: '], '', type_list)
             element = int(element[0])
-            modification = ui.get_inputs(['Change element: '], '', type_list)
+            modification = get_submenu_inputs(
+                ['Change element: '], '', type_list)
             nested_list[element] = modification[0]
     data_manager.write_table_to_file('tool_manager/tools.csv', table)
     return table
