@@ -28,27 +28,28 @@ def start_module():
     table = data_manager.get_table_from_file("crm/customers.csv")
     title = "Customer Relationship Management (CRM)"
     crm_options = ["Show table", "Add", "Remove",
-                            "Update", "Get longest name id", "Get subscribed emails"]
-    ui.print_menu(title, crm_options, 'Back to main menu')
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        list_labels = ['Add an id you want to remove: ']
-        inputs = ui.get_inputs(list_labels, '')
-        remove(table, inputs)
-    elif option == "4":
-        update(table, id_)
-    elif option == "5":
-        get_lowest_price_item_id(table)
-    elif option == "6":
-        get_items_sold_between(table, month_from, day_from,
-                               year_from, month_to, day_to, year_to)
-    elif option == "0":
-        return
+                   "Update", "Get longest name id", "Get subscribed emails"]
+    while True:
+        ui.print_menu(title, crm_options, 'Back to main menu')
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            list_labels = ['Add an id you want to remove: ']
+            inputs = ui.get_inputs(list_labels, '')
+            remove(table, inputs)
+        elif option == "4":
+            update(table, id_)
+        elif option == "5":
+            get_lowest_price_item_id(table)
+        elif option == "6":
+            get_items_sold_between(table, month_from, day_from,
+                                   year_from, month_to, day_to, year_to)
+        elif option == "0":
+            break
 
     pass
 
@@ -99,8 +100,13 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-
-    # your code
+    for nested_list in table:
+        if id_ == nested_list[0]:
+            element = ui.get_inputs(
+                ['Which elements index you want to modify: '], '')
+            element = int(element[0])
+            modification = ui.get_inputs(['Change element: '], '')
+            nested_list[element] = modification[0]
 
     return table
 
