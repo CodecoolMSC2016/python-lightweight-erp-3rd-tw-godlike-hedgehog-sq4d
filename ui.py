@@ -113,7 +113,8 @@ def get_inputs(list_labels, title):
         break
     return inputs
 
-    def get_submenu_inputs(list_labels, title, type_list):
+
+def get_submenu_inputs(list_labels, title, type_list):
     msg = ''
     inputs = []
     print(title)
