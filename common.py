@@ -35,3 +35,13 @@ def generate_random(table):
                 generated = ""
 
     return generated
+
+# Gets a list of strings from @inputs and checks whether they exist or not.
+# They should, so it will either print out an error message and return to get_inputs() function or quit.
+# Haven't made up my mind yet.
+
+
+def input_handler(inputs):
+    msg = 'wrong input Format. Please try again.'
+    for entry in inputs:
+        if len(entry) <= 0:
