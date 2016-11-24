@@ -29,8 +29,9 @@ def start_module():
     tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
                             'Get oldest person', 'Get closest-to-average aged people']
     while True:
+        type_list = ["int"]
         ui.print_menu(title, tool_manager_options, 'Back to main menu')
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -38,12 +39,14 @@ def start_module():
             add(table)
         elif option == "3":
             list_labels = ['Add an id you want to remove: ']
-            inputs = ui.get_inputs(list_labels,'')
+            type_list = ["str"]
+            inputs = ui.get_inputs(list_labels, '', type_list)
             inputs = inputs[0]
             remove(table, inputs)
         elif option == "4":
             list_labels = ['Add an id you want to update: ']
-            inputs = ui.get_inputs(list_labels,'')
+            type_list = ["str"]
+            inputs = ui.get_inputs(list_labels, '', type_list)
             inputs = inputs[0]
             update(table, inputs)
         elif option == "5":
@@ -75,12 +78,13 @@ def show_table(table):
 def add(table):
     id = common.generate_random(table)
     list_labels = ["name", "birth date"]
+    type_list = ["str", "int"]
     title = "Enter the details"
     inputs = []
-    inputs = ui.get_inputs(list_labels, title)
+    inputs = ui.get_inputs(list_labels, title, type_list)
     inputs.insert(0, id)
     table.append(inputs)
-    data_manager.write_table_to_file('faszomtudjami.csv', table)
+    data_manager.write_table_to_file('hr/persons.csv', table)
 
     return table
 
@@ -93,7 +97,7 @@ def remove(table, id_):
     for nested_list in table:
         if id_ == nested_list[0]:
             table.remove(nested_list)
-    data_manager.write_table_to_file('faszomtudjami.csv', table)
+    data_manager.write_table_to_file('hr/persons.csv', table)
     return table
 
 
@@ -103,13 +107,15 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
+    type_list = ["str"]
     for nested_list in table:
         if id_ == nested_list[0]:
             element = ui.get_inputs(
-                ['Which elements index you want to modify: '], '')
+                ['Which elements index you want to modify: '], '', type_list)
             element = int(element[0])
-            modification = ui.get_inputs(['Change element: '], '')
+            modification = ui.get_inputs(['Change element: '], '', type_list)
             nested_list[element] = modification[0]
+    data_manager.write_table_to_file('hr/persons.csv', table)
 
     return table
 
