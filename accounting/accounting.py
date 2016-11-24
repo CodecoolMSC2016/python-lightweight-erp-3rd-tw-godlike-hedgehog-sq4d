@@ -57,8 +57,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
+    title_list = ["id", "month", "day", "year", "type", "amount"]
+    ui.print_table(table, title_list)
 
     pass
 
