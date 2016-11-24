@@ -100,7 +100,8 @@ def print_menu(title, list_options, exit_message):
 # @list_labels: list of strings - the labels of the inputs
 # @title: string - title of the "input section"
 # @inputs: list of string - list of the received values from the user
-def get_inputs(list_labels, title):
+# @type_list: list of strings - to pass it to the input handler
+def get_inputs(list_labels, title, type_list):
     msg = ''
     inputs = []
     print(title)
@@ -127,13 +128,29 @@ def print_error_message(message):
 # Gets a list of strings from @inputs and checks whether they exist or not.
 # They should, so it will either print out an error message and return to get_inputs() function or quit.
 # Haven't made up my mind yet.
+# Also gets the format in a list of strings, then tries to convert the according input for the given type.
+# If it's unsuccesful, it will either print out an error message and return to get_inputs() function or quit
+# probably return tho.
 
 
-def input_handler(inputs):
+def input_handler(inputs, type_list):
     msg = ''
-    for entry in inputs:
-        if len(entry) <= 0:
-            msg = 'Wrong input format, please try again.'
-            return msg
+    #for entry in inputs:
+    #   if len(entry) <= 0:
+    #      msg = 'Wrong input format, please try again.'
+    #     return msg
+    for i in range(0, len(type_list)):
+        if type_list[i] == "str":
+            try:
+                inputs[i] = str(inputs[i])
+            except ValueError:
+                msg = 'Wrong input format, please try again.'
+                return msg
+        if type_list[i] == "int":
+            try:
+                inputs[i] = int(inputs[i])
+            except ValueError:
+                msg = 'Wrong input format, please try again.'
+                return msg
     msg = ''
     return msg
