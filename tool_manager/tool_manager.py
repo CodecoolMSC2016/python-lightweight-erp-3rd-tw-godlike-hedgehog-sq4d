@@ -141,9 +141,22 @@ def get_available_tools(table):
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
-
+    durability = {}
+    for row in range(len(table)):
+        counter = 0
+        sum = 0
+        result = 0
+        for manufacturer in range(len(table)):
+            if table[manufacturer][2] == table[row][2]:
+                sum += int(table[manufacturer][4])
+                counter +=1
+        result = sum/counter
+        durability.update({table[row][2]: result})
+    
+    return durability
+  
+            
     # your code
 
     pass
 
-#start_module()

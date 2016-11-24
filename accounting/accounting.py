@@ -31,25 +31,24 @@ def start_module():
     title = 'Accounting'
     tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
                             'Most profitable year', 'Average profit of an item per year']
-    ui.print_menu(title, tool_manager_options, 'Back to main menu')
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        remove(table, id_)
-    elif option == "4":
-        update(table, id_)
-    elif option == "5":
-        which_year_max(table)
-    elif option == "6":
-        avg_amount(table)
-    elif option == "0":
-        return
-
-    # you code
+    while True:
+        ui.print_menu(title, tool_manager_options, 'Back to main menu')
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id_)
+        elif option == "4":
+            update(table, id_)
+        elif option == "5":
+            which_year_max(table)
+        elif option == "6":
+            avg_amount(table)
+        elif option == "0":
+            break
 
     pass
 
@@ -97,8 +96,13 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-
-    # your code
+    for nested_list in table:
+        if id_ == nested_list[0]:
+            element = ui.get_inputs(
+                ['Which elements index you want to modify: '], '')
+            element = int(element[0])
+            modification = ui.get_inputs(['Change element: '], '')
+            nested_list[element] = modification[0]
 
     return table
 
