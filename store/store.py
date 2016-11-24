@@ -51,7 +51,9 @@ def start_module():
         elif option == "5":
             get_counts_by_manufacturers(table)
         elif option == "6":
-            get_average_by_manufacturer(table, manufacturer)
+            inputs = ui.get_inputs(["Add a manufacturer: "], "")
+            inputs = inputs[0]
+            get_average_by_manufacturer(table, inputs)
         elif option == "0":
             break
 
@@ -135,9 +137,14 @@ def get_counts_by_manufacturers(table):
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
-
-    # your code
+    amount = 0
+    counter = 0
+    result = 0
+    for row in range(len(table)):
+        if manufacturer == table[row][2]:
+            amount += int(table[row][4])
+            counter += 1 
+    result = amount/counter
+    print(result)
 
     pass
-
-start_module()
