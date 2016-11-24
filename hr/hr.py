@@ -132,15 +132,15 @@ def get_persons_closest_to_average(table):
     avg = 0
     counter = 0
     for item in table:
-        avg += item[2]
+        avg += int(item[2])
         counter += 1
     avg = avg / counter
     difference = 10000
     for item in table:
-        if abs(item[2] - avg) < difference:
-            difference = abs(item[2] - avg)
+        if abs(int(item[2]) - avg) < difference:
+            difference = abs(int(item[2]) - avg)
     for item in table:
-        if abs(item[2] - avg) == difference:
+        if abs(int(item[2]) - avg) == difference:
             closest_to_avg_person.append(item[1])
 
     return(closest_to_avg_person)
