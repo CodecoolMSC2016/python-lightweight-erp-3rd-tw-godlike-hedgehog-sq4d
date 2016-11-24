@@ -47,15 +47,14 @@ def start_module():
             inputs = inputs[0]
             update(table, inputs)
         elif option == "5":
-            get_available_tools(table)
+            result = get_available_tools(table)
+            ui.print_result(result,'')
         elif option == "6":
-            get_average_durability_by_manufacturers(table)
+            result = get_average_durability_by_manufacturers(table)
+            ui.print_result(result,'')
         elif option == "0":
             break
     return
-    
-
-
     pass
 
 
@@ -63,10 +62,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-    print('Fika')
-    print(table)
-
-    # your code
+    title_list = ["id", "name", "manufacturer", "purchase date", "durability"]
+    ui.print_table(table,title_list)
 
     pass
 
@@ -124,9 +121,12 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_tools(table):
-
-    # your code
-
+    year = 2016
+    result_list =[]
+    for nested_list in table:
+        if (int(nested_list[3])+int(nested_list[4]))>=year:
+            result_list.append(nested_list)
+    return result_list
     pass
 
 
@@ -135,9 +135,18 @@ def get_available_tools(table):
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
-
-    # your code
-
+    durability = {}
+    for row in range(len(table)):
+        counter = 0
+        sum = 0
+        result = 0
+        for manufacturer in range(len(table)):
+            if table[manufacturer][2] == table[row][2]:
+                sum += int(table[manufacturer][4])
+                counter +=1
+        result = sum/counter
+        durability.update({table[row][2]: result})
+    
+    return durability
     pass
 
-#start_module()

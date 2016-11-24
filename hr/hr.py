@@ -37,13 +37,21 @@ def start_module():
         elif option == "2":
             add(table)
         elif option == "3":
-            remove(table, id_)
+            list_labels = ['Add an id you want to remove: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            remove(table, inputs)
         elif option == "4":
-            update(table, id_)
+            ist_labels = ['Add an id you want to update: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            update(table, inputs)
         elif option == "5":
-            get_oldest_person(table)
+            result = get_oldest_person(table)
+            ui.print_result(result, "Oldest person/s is/are: ")
         elif option == "6":
-            get_persons_closest_to_average(table)
+            result = get_persons_closest_to_average(table)
+            ui.print_result(result, "Closest to average person is: ")
         elif option == "0":
             break
 
@@ -54,7 +62,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
+    title_list = ["id", "name", "birth_date"]
+    ui.print_table(table, title_list)
     # your code
 
     pass
@@ -71,7 +80,6 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title)
     inputs.insert(0, id)
     table.append(inputs)
-    print(table)
 
     return table
 

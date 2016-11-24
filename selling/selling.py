@@ -61,8 +61,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
+    title_list = ["id", "title", "price", "month", "day", "year"]
+    ui.print_table(table, title_list)
 
     pass
 
@@ -120,10 +120,18 @@ def update(table, id_):
 # if there are more than one with the lowest price, return the first of
 # descending alphabetical order
 def get_lowest_price_item_id(table):
+    lowest_price = table[0][2]
+    result = ''
+    for item in table:
+        if item[2] < lowest_price:
+            lowest_price = item[2]
+    found_lowest = False
+    for item in table:
+        if item[2] == lowest_price and not found_lowest:
+            result = item[0]
+            found_lowest = True
 
-    # your code
-
-    pass
+    return(result)
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)

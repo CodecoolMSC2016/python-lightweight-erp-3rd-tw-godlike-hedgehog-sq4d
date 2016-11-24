@@ -57,8 +57,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
+    title_list = ["id", "month", "day", "year", "type", "amount"]
+    ui.print_table(table, title_list)
 
     pass
 
@@ -114,10 +114,24 @@ def update(table, id_):
 # the question: Which year has the highest profit? (profit=in-out)
 # return the answer (number)
 def which_year_max(table):
-
-    # your code
-
-    pass
+    max_value = 0
+    years_dict = {}
+    most_profitable_year = 0
+    for line in table:
+        if line[3] not in years_dict:
+            years_dict.update({line[3]: int(line[5])})
+        else:
+            if line[4] == "out":
+                years_dict[line[3]] -= int(line[5])
+            if line[3] in years_dict:
+                years_dict[line[3]] += int(line[5])
+    for value in years_dict.values():
+        if int(value) > max_value:
+            max_value = int(value)
+    for key, value in years_dict.items():
+        if value == max_value:
+            print(key)
+            return key
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
