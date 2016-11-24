@@ -46,7 +46,10 @@ def start_module():
         elif option == "5":
             which_year_max(table)
         elif option == "6":
-            avg_amount(table)
+            list_labels = ['Enter the year']
+            inputs = ui.get_inputs(list_labels, '')
+            result = avg_amount(table, int(inputs[0]))
+            ui.print_result(result, '')
         elif option == "0":
             break
 
@@ -137,7 +140,19 @@ def which_year_max(table):
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
+    avg = 0
+    counter = 0
+    for item in table:
+        if int(item[3]) == year:
+            if item[4] == 'in':
+                avg += int(item[5])
+            elif item[4] == 'out':
+                avg -= int(item[5])
+            counter += 1
 
-    # your code
+    if counter == 0:
+        result = 0
+    else:
+        result = avg / counter
 
-    pass
+    return(result)
