@@ -37,9 +37,15 @@ def start_module():
         elif option == "2":
             add(table)
         elif option == "3":
-            remove(table, id_)
+            list_labels = ['Add an id you want to remove: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            remove(table, inputs)
         elif option == "4":
-            update(table, id_)
+            ist_labels = ['Add an id you want to update: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            update(table, inputs)
         elif option == "5":
             result = get_oldest_person(table)
             ui.print_result(result, "Oldest person/s is/are: ")
@@ -74,7 +80,6 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title)
     inputs.insert(0, id)
     table.append(inputs)
-    print(table)
 
     return table
 
