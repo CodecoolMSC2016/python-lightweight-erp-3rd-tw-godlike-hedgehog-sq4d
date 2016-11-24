@@ -29,25 +29,35 @@ common = SourceFileLoader(
 def start_module():
     table = data_manager.get_table_from_file('accounting/items.csv')
     title = 'Accounting'
+    type_list = ["int"]
     tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
                             'Most profitable year', 'Average profit of an item per year']
     while True:
         ui.print_menu(title, tool_manager_options, 'Back to main menu')
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
         option = inputs[0]
         if option == "1":
             show_table(table)
         elif option == "2":
             add(table)
         elif option == "3":
-            remove(table, id_)
+            type_list = "str"
+            list_labels = ['Add an id you want to remove: ']
+            inputs = ui.get_inputs(list_labels, '', type_list)
+            inputs = inputs[0]
+            remove(table, inputs)
         elif option == "4":
-            update(table, id_)
+            list_labels = ['Add an id you want to update: ']
+            type_list = ["str"]
+            inputs = ui.get_inputs(list_labels, '', type_list)
+            inputs = inputs[0]
+            update(table, inputs)
         elif option == "5":
             which_year_max(table)
         elif option == "6":
             list_labels = ['Enter the year']
-            inputs = ui.get_inputs(list_labels, '')
+            type_list = ["int"]
+            inputs = ui.get_inputs(list_labels, '', type_list)
             result = avg_amount(table, int(inputs[0]))
             ui.print_result(result, '')
         elif option == "0":
@@ -74,10 +84,10 @@ def add(table):
     list_labels = ["month", "day", "year", "type", "amount"]
     title = "Enter the details"
     inputs = []
-    inputs = ui.get_inputs(list_labels, title)
+    inputs = ui.get_inputs(list_labels, title, type_list)
     inputs.insert(0, id)
     table.append(inputs)
-
+    data_manager.write_table_to_file('accounting/items.csv', table)
     return table
 
 
@@ -89,7 +99,7 @@ def remove(table, id_):
     for nested_list in table:
         if id_ == nested_list[0]:
             table.remove(nested_list)
-    data_manager.write_table_to_file('faszomtudjami.csv', table)
+    data_manager.write_table_to_file('accounting/items.csv', table)
     return table
 
 
