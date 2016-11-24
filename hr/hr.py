@@ -24,7 +24,7 @@ common = SourceFileLoader(
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-    table = data_manager.get_table_from_file('hr/hr.csv')
+    table = data_manager.get_table_from_file('hr/persons.csv')
     title = 'Human Resources'
     tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
                             'Get oldest person', 'Get closest-to-average aged people']
