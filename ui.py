@@ -111,8 +111,8 @@ def get_inputs(list_labels, title, type_list):
             label = label + " : "
             usr_in = input(label)
             inputs.append(usr_in)
-        print_error_message(input_handler(inputs))
-        msg = input_handler(inputs)
+        print_error_message(input_handler(inputs, type_list))
+        msg = input_handler(inputs, type_list)
         if msg == '':
             break
     return inputs
@@ -149,6 +149,7 @@ def input_handler(inputs, type_list):
         if type_list[i] == "int":
             try:
                 inputs[i] = int(inputs[i])
+                inputs[i] = str(inputs[i])
             except ValueError:
                 msg = 'Wrong input format, please try again.'
                 return msg

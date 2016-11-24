@@ -1,5 +1,6 @@
 # Do not modify this file
-# run the program (the ERP software) by this file from the terminal from thd root directory of this project
+# run the program (the ERP software) by this file from the terminal from
+# thd root directory of this project
 
 
 import sys
@@ -12,17 +13,21 @@ store = SourceFileLoader("store", main_path + "/store/store.py").load_module()
 # Human Resources module
 hr = SourceFileLoader("hr", main_path + "/hr/hr.py").load_module()
 # Tool manager module
-tool_manager = SourceFileLoader("tool_manager", main_path + "/tool_manager/tool_manager.py").load_module()
+tool_manager = SourceFileLoader(
+    "tool_manager", main_path + "/tool_manager/tool_manager.py").load_module()
 # Accounting module
-accounting = SourceFileLoader("accounting", main_path + "/accounting/accounting.py").load_module()
+accounting = SourceFileLoader(
+    "accounting", main_path + "/accounting/accounting.py").load_module()
 # Selling module
-selling = SourceFileLoader("selling", main_path + "/selling/selling.py").load_module()
+selling = SourceFileLoader("selling", main_path +
+                           "/selling/selling.py").load_module()
 # Customer Relationship Management (CRM) module
 crm = SourceFileLoader("crm", main_path + "/crm/crm.py").load_module()
 
 
 def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
+    type_list = ["int"]
+    inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
     option = inputs[0]
     if option == "1":
         store.start_module()
