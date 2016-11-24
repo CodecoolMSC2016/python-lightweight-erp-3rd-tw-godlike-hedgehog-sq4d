@@ -26,7 +26,7 @@ common = SourceFileLoader(
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-    table = data_manager.get_table_from_file('selling/sellings.csv')
+    table = data_manager.get_table_from_file('store/games.csv')
     title = 'Tool manager'
     tool_manager_options = ['Show table', 'Add', 'Remove',
                             'Update', 'Get games by manufacturers', 'Get average stock amounts']
@@ -58,8 +58,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
+    title_list = ["id", "title", "manufacturer", "price", "in_stock"]
+    ui.print_table(table, title_list)
 
     pass
 
