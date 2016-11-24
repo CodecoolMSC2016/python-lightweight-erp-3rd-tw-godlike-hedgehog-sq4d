@@ -57,8 +57,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
-    # your code
+    title_list = ["id", "month", "day", "year", "type", "amount"]
+    ui.print_table(table, title_list)
 
     pass
 
@@ -84,9 +84,10 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
-
-    # your code
-
+    for nested_list in table:
+        if id_ == nested_list[0]:
+            table.remove(nested_list)
+    data_manager.write_table_to_file('faszomtudjami.csv', table)
     return table
 
 
@@ -113,9 +114,21 @@ def update(table, id_):
 # the question: Which year has the highest profit? (profit=in-out)
 # return the answer (number)
 def which_year_max(table):
-
-    # your code
-
+    max = 0
+    years_dict = {}
+    for line in table:
+        if line[3] not in years_dict:
+            years_dict.update({line[3]: int(line[5])})
+        if line[3] in years_dict:
+            years_dict[line[3]] += int(line[5])
+    for line in table:
+        if line[4] == "out":
+            years_dict[line[3]] -= int(line[5])
+    for value in years_dict.values():
+        if int(value) > max:
+            max = int(value)
+    most_proitable_year = years_dict[max]
+    print (most_profitable_year)
     pass
 
 

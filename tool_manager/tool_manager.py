@@ -53,9 +53,6 @@ def start_module():
         elif option == "0":
             break
     return
-    
-
-
     pass
 
 
@@ -63,10 +60,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-    print('Fika')
-    print(table)
-
-    # your code
+    title_list = ["id", "name", "manufacturer", "purchase date", "durability"]
+    ui.print_table(table,title_list)
 
     pass
 
@@ -130,9 +125,6 @@ def get_available_tools(table):
         if (int(nested_list[3])+int(nested_list[4]))>=year:
             result_list.append(nested_list)
     print(result_list)
-
-    # your code
-
     pass
 
 
@@ -154,9 +146,5 @@ def get_average_durability_by_manufacturers(table):
         durability.update({table[row][2]: result})
     
     return durability
-  
-            
-    # your code
-
     pass
 

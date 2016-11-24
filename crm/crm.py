@@ -100,7 +100,6 @@ def remove(table, id_):
 # @table: list of lists
 # @id_: string
 def update(table, id_):
-    def update(table, id_):
     for nested_list in table:
         if id_ == nested_list[0]:
             element = ui.get_inputs(

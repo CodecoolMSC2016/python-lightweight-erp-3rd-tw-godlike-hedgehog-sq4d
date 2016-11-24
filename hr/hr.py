@@ -24,7 +24,7 @@ common = SourceFileLoader(
 # we need to reach the default and the special functions of this module from the module menu
 #
 def start_module():
-    table = data_manager.get_table_from_file('hr/hr.csv')
+    table = data_manager.get_table_from_file('hr/persons.csv')
     title = 'Human Resources'
     tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
                             'Get oldest person', 'Get closest-to-average aged people']
@@ -37,13 +37,19 @@ def start_module():
         elif option == "2":
             add(table)
         elif option == "3":
-            remove(table, id_)
+            list_labels = ['Add an id you want to remove: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            remove(table, inputs)
         elif option == "4":
-            update(table, id_)
+            ist_labels = ['Add an id you want to update: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            update(table, inputs)
         elif option == "5":
-            which_year_max(table)
+            get_oldest_person(table)
         elif option == "6":
-            avg_amount(table)
+            get_persons_closest_to_average(table)
         elif option == "0":
             break
 
@@ -54,7 +60,8 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
-
+    title_list = ["id", "name", "birth_date"]
+    ui.print_table(table, title_list)
     # your code
 
     pass
@@ -71,7 +78,6 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title)
     inputs.insert(0, id)
     table.append(inputs)
-    print(table)
 
     return table
 
@@ -112,17 +118,35 @@ def update(table, id_):
 # return type: list of strings (name or names if there are two more with
 # the same value)
 def get_oldest_person(table):
+    oldest_person = []
+    birth_date = table[0][2]
+    for item in table:
+        if item[2] < birth_date:
+            birth_date = item[2]
+    for item in table:
+        if item[2] == birth_date:
+            oldest_person.append(item[1])
 
-    # your code
-
-    pass
+    return(oldest_person)
 
 
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with
 # the same value)
 def get_persons_closest_to_average(table):
+    closest_to_avg_person = []
+    avg = 0
+    counter = 0
+    for item in table:
+        avg += int(item[2])
+        counter += 1
+    avg = avg / counter
+    difference = 10000
+    for item in table:
+        if abs(int(item[2]) - avg) < difference:
+            difference = abs(int(item[2]) - avg)
+    for item in table:
+        if abs(int(item[2]) - avg) == difference:
+            closest_to_avg_person.append(item[1])
 
-    # your code
-
-    pass
+    return(closest_to_avg_person)
