@@ -27,7 +27,7 @@ common = SourceFileLoader(
 #
 def start_module():
     table = data_manager.get_table_from_file('store/games.csv')
-    title = 'Tool manager'
+    title = 'Store manager'
     tool_manager_options = ['Show table', 'Add', 'Remove',
                             'Update', 'Get games by manufacturers', 'Get average stock amounts']
     while True:
@@ -131,7 +131,7 @@ def get_counts_by_manufacturers(table):
                 counter +=1
         manufacture.update({table[row][2]: counter})
     
-    print(manufacture)
+    return manufacture
 
     pass
 
