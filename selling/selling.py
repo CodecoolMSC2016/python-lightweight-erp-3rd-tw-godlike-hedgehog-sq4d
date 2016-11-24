@@ -10,6 +10,7 @@
 
 
 # importing everything you need
+from datetime import date
 import os
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
@@ -142,6 +143,7 @@ def get_lowest_price_item_id(table):
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+
     converted_from = date_converter(month_from, day_from, year_from)
     converted_to = date_converter(month_to, day_to, year_to)
 

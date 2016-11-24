@@ -60,7 +60,7 @@ def print_result(result, label):
         for item in result:
             print(item)
         print("")
-    if type(result) == dict:
+    elif type(result) == dict:
         for key, value in result.items():
             print(key, " : ", value)
         print("")
