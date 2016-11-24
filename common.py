@@ -42,6 +42,8 @@ def generate_random(table):
 
 
 def input_handler(inputs):
-    msg = 'wrong input Format. Please try again.'
+    msg = ''
     for entry in inputs:
         if len(entry) <= 0:
+            msg = 'Wrong input format, please try again.'
+            return msg
