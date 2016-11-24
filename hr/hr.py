@@ -41,9 +41,9 @@ def start_module():
         elif option == "4":
             update(table, id_)
         elif option == "5":
-            which_year_max(table)
+            get_oldest_person(table)
         elif option == "6":
-            avg_amount(table)
+            get_persons_closest_to_average(table)
         elif option == "0":
             break
 
@@ -128,7 +128,19 @@ def get_oldest_person(table):
 # return type: list of strings (name or names if there are two more with
 # the same value)
 def get_persons_closest_to_average(table):
+    closest_to_avg_person = []
+    avg = 0
+    counter = 0
+    for item in table:
+        avg += item[2]
+        counter += 1
+    avg = avg / counter
+    difference = 10000
+    for item in table:
+        if abs(item[2] - avg) < difference:
+            difference = abs(item[2] - avg)
+    for item in table:
+        if abs(item[2] - avg) == difference:
+            closest_to_avg_person.append(item[1])
 
-    # your code
-
-    pass
+    return(closest_to_avg_person)
