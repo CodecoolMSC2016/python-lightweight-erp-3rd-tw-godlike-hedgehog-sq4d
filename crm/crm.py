@@ -127,7 +127,7 @@ def get_longest_name_id(table):
     for item in table:
         if len(item[1]) == name_lenght:
             name.append(item[1])
-    # bubble sort, hogy a listát rendezzük sort() nélkül; descending alphabetical: A-Z
+    # bubble rendezés, descending alphabetical: A-Z
     for num in range(len(name)-1,0,-1):
         for i in range(num):
             if name[i] > name[i+1]:
