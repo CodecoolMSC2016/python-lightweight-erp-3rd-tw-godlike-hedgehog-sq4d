@@ -10,7 +10,6 @@
 
 
 # importing everything you need
-from datetime import date
 import os
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
@@ -149,8 +148,13 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
     result = []
     for item in table:
-        if date_converter(item[3], item[4], item[5]) >= converted_from and date_converter(item[3], item[4], item[5]) <= converted_to:
+        if date_converter(item[3], item[4], item[5]) > converted_from and date_converter(item[3], item[4], item[5]) < converted_to:
+            item[2] = int(item[2])
+            item[3] = int(item[3])
+            item[4] = int(item[4])
+            item[5] = int(item[5])
             result.append(item)
+
     return(result)
 
 
