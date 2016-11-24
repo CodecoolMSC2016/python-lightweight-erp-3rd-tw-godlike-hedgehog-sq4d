@@ -31,7 +31,8 @@ def start_module():
     while True:
         type_list = ["int"]
         ui.print_menu(title, tool_manager_options, 'Back to main menu')
-        inputs = get_submenu_inputs(["Please enter a number: "], "", type_list)
+        inputs = ui.get_submenu_inputs(
+            ["Please enter a number: "], "", type_list)
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -40,7 +41,7 @@ def start_module():
         elif option == "3":
             list_labels = ['Add an id you want to remove: ']
             type_list = ["str"]
-            inputs = get_submenu_inputs(list_labels, '', type_list)
+            inputs = ui.get_submenu_inputs(list_labels, '', type_list)
             inputs = inputs[0]
             remove(table, inputs)
         elif option == "4":
@@ -81,7 +82,7 @@ def add(table):
     type_list = ["str", "int"]
     title = "Enter the details"
     inputs = []
-    inputs = get_submenu_inputs(list_labels, title, type_list)
+    inputs = ui.get_submenu_inputs(list_labels, title, type_list)
     inputs.insert(0, id)
     table.append(inputs)
     data_manager.write_table_to_file('hr/persons.csv', table)
@@ -110,10 +111,10 @@ def update(table, id_):
     type_list = ["str"]
     for nested_list in table:
         if id_ == nested_list[0]:
-            element = get_submenu_inputs(
+            element = ui.get_submenu_inputs(
                 ['Which elements index you want to modify: '], '', type_list)
             element = int(element[0])
-            modification = get_submenu_inputs(
+            modification = ui.get_submenu_inputs(
                 ['Change element: '], '', type_list)
             nested_list[element] = modification[0]
     data_manager.write_table_to_file('hr/persons.csv', table)
