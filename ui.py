@@ -63,9 +63,9 @@ def print_result(result, label):
         for key, value in result.items():
             print(key, " : ", value)
         print("")
-    if type(result) == str or type(result) == int:
-            print("")
-            print(result, '\n')
+    else:
+        print("")
+        print(result, '\n')
 
     pass
 
