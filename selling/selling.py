@@ -141,11 +141,34 @@ def get_lowest_price_item_id(table):
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+
+    converted_from = date_converter(month_from, day_from, year_from)
+    converted_to = date_converter(month_to, day_to, year_to)
+
     result = []
-    start = date(int(year_from), int(month_from), int(day_from))
-    end = date(int(year_to), int(month_to), int(day_to))
     for item in table:
-        if end >= date(int(item[5]), int(item[3]), int(item[4])) >= start:
+        if date_converter(item[3], item[4], item[5]) >= converted_from and date_converter(item[3], item[4], item[5]) <= converted_to:
             result.append(item)
+    print(result)
+    return(result)
+
+
+def date_converter(month, day, year):
+    year = str(year)
+    new_day = ''
+    new_month = ''
+    result = ''
+    if len(day) == 1:
+        new_day = '0' + day
+    else:
+        new_day = day
+    if len(month) == 1:
+        new_month = '0' + month
+    else:
+        new_month = month
+    result += year
+    result += new_month
+    result += new_day
+    result = int(result)
 
     return(result)
