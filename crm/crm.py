@@ -26,12 +26,13 @@ common = SourceFileLoader(
 #
 def start_module():
     table = data_manager.get_table_from_file("crm/customers.csv")
+    type_list = ["int"]
     title = "Customer Relationship Management (CRM)"
     crm_options = ["Show table", "Add", "Remove",
                    "Update", "Get longest name id", "Get subscribed emails"]
     while True:
         ui.print_menu(title, crm_options, 'Back to main menu')
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
         option = inputs[0]
         if option == "1":
             show_table(table)
@@ -39,17 +40,19 @@ def start_module():
             add(table)
         elif option == "3":
             list_labels = ['Add an id you want to remove: ']
-            inputs = ui.get_inputs(list_labels, '')
+            type_list = ["str"]
+            inputs = ui.get_inputs(list_labels, '', type_list)
             inputs = inputs[0]
             remove(table, inputs)
         elif option == "4":
             list_labels = ['Add an id you want to update: ']
-            inputs = ui.get_inputs(list_labels,'')
+            type_list = ["str"]
+            inputs = ui.get_inputs(list_labels, '', type_list)
             inputs = inputs[0]
             update(table, inputs)
         elif option == "5":
             result = get_longest_name_id(table)
-            ui.print_result(result, "") 
+            ui.print_result(result, "")
         elif option == "6":
             result = get_subscribed_emails(table)
             ui.print_result(result, "")
@@ -74,10 +77,11 @@ def show_table(table):
 def add(table):
 
     id = common.generate_random(table)
+    type_list = ["str", "str", "int"]
     list_labels = ["name", "email", "subscribed"]
     title = "Enter the details"
     inputs = []
-    inputs = ui.get_inputs(list_labels, title)
+    inputs = ui.get_inputs(list_labels, title, type_list)
     inputs.insert(0, id)
     table.append(inputs)
     data_manager.write_table_to_file("teszt.csv", table)
@@ -106,9 +110,9 @@ def update(table, id_):
     for nested_list in table:
         if id_ == nested_list[0]:
             element = ui.get_inputs(
-                ['Which elements index you want to modify: '], '')
+                ['Which elements index you want to modify: '], '', type_list)
             element = int(element[0])
-            modification = ui.get_inputs(['Change element: '], '')
+            modification = ui.get_inputs(['Change element: '], '', type_list)
             nested_list[element] = modification[0]
 
     return table
@@ -128,17 +132,17 @@ def get_longest_name_id(table):
         if len(item[1]) == name_lenght:
             name.append(item[1])
     # bubble rendezés, descending alphabetical: A-Z
-    for num in range(len(name)-1,0,-1):
+    for num in range(len(name) - 1, 0, -1):
         for i in range(num):
-            if name[i] > name[i+1]:
+            if name[i] > name[i + 1]:
                 temp = name[i]
-                name[i] = name[i+1]
-                name[i+1] = temp
+                name[i] = name[i + 1]
+                name[i + 1] = temp
     # az id meghatározása
     for line in table:
         if name[0] == line[1]:
             return (line[0])
-    
+
     pass
 
 
@@ -155,5 +159,5 @@ def get_subscribed_emails(table):
             result_item = email + ";" + name
             result_list.append(result_item)
     return result_list
-     
+
     pass
