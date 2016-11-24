@@ -10,6 +10,7 @@
 
 
 # importing everything you need
+from datetime import date
 import os
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
@@ -41,7 +42,7 @@ def start_module():
         elif option == "2":
             add(table)
         elif option == "3":
-            list_labels = ['Add an id you want to remove: ']
+            list_labels = ['Add an id you want to remove']
             inputs = ui.get_inputs(list_labels, '')
             remove(table, inputs)
         elif option == "4":
@@ -49,8 +50,11 @@ def start_module():
         elif option == "5":
             get_lowest_price_item_id(table)
         elif option == "6":
-            get_items_sold_between(table, month_from, day_from,
-                                   year_from, month_to, day_to, year_to)
+            list_labels = ['Enter the starting month', 'Enter the starting day', 'Enter the starting year',
+                           'Enter the ending month', 'Enter the ending day', 'Enter the ending year']
+            inputs = ui.get_inputs(list_labels, '')
+            get_items_sold_between(table, inputs[0], inputs[1],
+                                   inputs[2], inputs[3], inputs[4], inputs[5])
         elif option == "0":
             break
 
@@ -137,7 +141,11 @@ def get_lowest_price_item_id(table):
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+    result = []
+    start = date(int(year_from), int(month_from), int(day_from))
+    end = date(int(year_to), int(month_to), int(day_to))
+    for item in table:
+        if end >= date(int(item[5]), int(item[3]), int(item[4])) >= start:
+            result.append(item)
 
-    # your code
-
-    pass
+    return(result)
