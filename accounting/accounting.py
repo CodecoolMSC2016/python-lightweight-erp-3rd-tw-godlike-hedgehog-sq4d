@@ -114,9 +114,21 @@ def update(table, id_):
 # the question: Which year has the highest profit? (profit=in-out)
 # return the answer (number)
 def which_year_max(table):
-
-    # your code
-
+    max = 0
+    years_dict = {}
+    for line in table:
+        if line[3] not in years_dict:
+            years_dict.update({line[3]: int(line[5])})
+        if line[3] in years_dict:
+            years_dict[line[3]] += int(line[5])
+    for line in table:
+        if line[4] == "out":
+            years_dict[line[3]] -= int(line[5])
+    for value in years_dict.values():
+        if int(value) > max:
+            max = int(value)
+    most_proitable_year = years_dict[max]
+    print (most_profitable_year)
     pass
 
 
