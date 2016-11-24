@@ -49,11 +49,13 @@ def start_module():
             inputs = inputs[0]
             update(table, inputs)
         elif option == "5":
-            get_counts_by_manufacturers(table)
+            result = get_counts_by_manufacturers(table)
+            ui.print_result(result,'')
         elif option == "6":
             inputs = ui.get_inputs(["Add a manufacturer: "], "")
             inputs = inputs[0]
-            get_average_by_manufacturer(table, inputs)
+            result = get_average_by_manufacturer(table, inputs)
+            ui.print_result(result,'')
         elif option == "0":
             break
 
@@ -129,7 +131,7 @@ def get_counts_by_manufacturers(table):
                 counter +=1
         manufacture.update({table[row][2]: counter})
     
-    return manufacture
+    print(manufacture)
 
     pass
 
@@ -145,6 +147,6 @@ def get_average_by_manufacturer(table, manufacturer):
             amount += int(table[row][4])
             counter += 1 
     result = amount/counter
-    print(result)
+    return result
 
     pass

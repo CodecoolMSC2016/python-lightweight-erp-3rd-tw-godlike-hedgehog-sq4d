@@ -47,9 +47,11 @@ def start_module():
             inputs = inputs[0]
             update(table, inputs)
         elif option == "5":
-            get_available_tools(table)
+            result = get_available_tools(table)
+            ui.print_result(result,'')
         elif option == "6":
-            get_average_durability_by_manufacturers(table)
+            result = get_average_durability_by_manufacturers(table)
+            ui.print_result(result,'')
         elif option == "0":
             break
     return
@@ -124,7 +126,7 @@ def get_available_tools(table):
     for nested_list in table:
         if (int(nested_list[3])+int(nested_list[4]))>=year:
             result_list.append(nested_list)
-    print(result_list)
+    return result_list
     pass
 
 
