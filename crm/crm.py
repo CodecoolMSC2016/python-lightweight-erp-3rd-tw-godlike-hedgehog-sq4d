@@ -27,9 +27,9 @@ common = SourceFileLoader(
 def start_module():
     table = data_manager.get_table_from_file("crm/customers.csv")
     title = "Customer Relationship Management (CRM)"
-    tool_manager_options = ["Show table", "Add", "Remove",
+    crm_options = ["Show table", "Add", "Remove",
                             "Update", "Get longest name id", "Get subscribed emails"]
-    ui.print_menu(title, tool_manager_options, 'Back to main menu')
+    ui.print_menu(title, crm_options, 'Back to main menu')
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -57,8 +57,9 @@ def start_module():
 #
 # @table: list of lists
 def show_table(table):
+    title_list = ["id", "name", "email", "subscribed"]
 
-    print(table)
+    ui.print_table(table, title_list)
 
     pass
 

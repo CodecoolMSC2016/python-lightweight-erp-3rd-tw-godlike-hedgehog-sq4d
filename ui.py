@@ -12,10 +12,32 @@
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
 def print_table(table, title_list):
+    # címsor maximális oszlopszélessége
+    for item in title_list:
+        max_len =  len(max(title_list, key = len))
+    # az oszlopszélesség meghatározása
+    max_lenght_list = [max(len(str(item)) for item in line) for line in zip(*table)]
+    print(max_lenght_list)
+    # tábla szélesség meghatározása
+    table_lenght = 0
+    for item in max_lenght_list:
+        table_lenght += int(item)
+    table_lenght = table_lenght + int(len(title_list))*2
+    print(table_lenght)
 
-    # your code
+    print("/", "-"*table_lenght, chr(92))
+    print("|", end = "")
+    for index in range(0, len(title_list)):
+        print(title_list[index].center(max_lenght_list[index]+2), "|", end = "")
+    print('\n')   
+    print("|", end = "")
+    for index in range(0, len(title_list)):
+        print("-"*(max_lenght_list[index]+2), "|", end = "")
+    print('\n')
 
-    pass
+    
+                
+    #pass
 
 
 # This function needs to print result of the special functions
