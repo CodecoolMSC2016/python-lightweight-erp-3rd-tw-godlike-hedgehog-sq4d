@@ -41,9 +41,11 @@ def start_module():
         elif option == "4":
             update(table, id_)
         elif option == "5":
-            get_oldest_person(table)
+            result = get_oldest_person(table)
+            ui.print_result(result, "Oldest person/s is/are: ")
         elif option == "6":
-            get_persons_closest_to_average(table)
+            result = get_persons_closest_to_average(table)
+            ui.print_result(result, "Closest to average person is: ")
         elif option == "0":
             break
 
