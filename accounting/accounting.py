@@ -84,9 +84,10 @@ def add(table):
 # @table: list of lists
 # @id_: string
 def remove(table, id_):
-
-    # your code
-
+    for nested_list in table:
+        if id_ == nested_list[0]:
+            table.remove(nested_list)
+    data_manager.write_table_to_file('faszomtudjami.csv', table)
     return table
 
 
