@@ -112,10 +112,16 @@ def update(table, id_):
 # return type: list of strings (name or names if there are two more with
 # the same value)
 def get_oldest_person(table):
+    oldest_person = []
+    birth_date = table[0][2]
+    for item in table:
+        if item[2] < birth_date:
+            birth_date = item[2]
+    for item in table:
+        if item[2] == birth_date:
+            oldest_person.append(item[1])
 
-    # your code
-
-    pass
+    return(oldest_person)
 
 
 # the question: Who is the closest to the average age ?
