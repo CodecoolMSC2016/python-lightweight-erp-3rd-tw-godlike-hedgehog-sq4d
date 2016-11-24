@@ -124,6 +124,12 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_tools(table):
+    year = 2016
+    result_list =[]
+    for nested_list in table:
+        if (int(nested_list[3])+int(nested_list[4]))>=year:
+            result_list.append(nested_list)
+    print(result_list)
 
     # your code
 
