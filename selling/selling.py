@@ -47,13 +47,15 @@ def start_module():
         elif option == "4":
             update(table, id_)
         elif option == "5":
-            get_lowest_price_item_id(table)
+            result = get_lowest_price_item_id(table)
+            ui.print_result(result, '')
         elif option == "6":
             list_labels = ['Enter the starting month', 'Enter the starting day', 'Enter the starting year',
                            'Enter the ending month', 'Enter the ending day', 'Enter the ending year']
             inputs = ui.get_inputs(list_labels, '')
-            get_items_sold_between(table, inputs[0], inputs[1],
-                                   inputs[2], inputs[3], inputs[4], inputs[5])
+            result = get_items_sold_between(table, inputs[0], inputs[1],
+                                            inputs[2], inputs[3], inputs[4], inputs[5])
+            ui.print_result(result, '')
         elif option == "0":
             break
 
@@ -147,12 +149,13 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     for item in table:
         if date_converter(item[3], item[4], item[5]) >= converted_from and date_converter(item[3], item[4], item[5]) <= converted_to:
             result.append(item)
-    print(result)
     return(result)
 
 
 def date_converter(month, day, year):
     year = str(year)
+    month = str(month)
+    day = str(day)
     new_day = ''
     new_month = ''
     result = ''
