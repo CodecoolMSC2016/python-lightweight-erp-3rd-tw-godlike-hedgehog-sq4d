@@ -40,13 +40,19 @@ def start_module():
         elif option == "3":
             list_labels = ['Add an id you want to remove: ']
             inputs = ui.get_inputs(list_labels, '')
+            inputs = inputs[0]
             remove(table, inputs)
         elif option == "4":
-            update(table, id_)
+            list_labels = ['Add an id you want to update: ']
+            inputs = ui.get_inputs(list_labels,'')
+            inputs = inputs[0]
+            update(table, inputs)
         elif option == "5":
-            get_longest_name_id(table)
+            result = get_longest_name_id(table)
+            ui.print_result(result, "") 
         elif option == "6":
-            get_subscribed_emails(table)
+            result = get_subscribed_emails(table)
+            ui.print_result(result, "")
         elif option == "0":
             break
 
@@ -111,7 +117,6 @@ def update(table, id_):
 # special functions:
 # ------------------
 
-
 # the question: What is the id of the customer with the longest name ?
 # return type: string (id) - if there are more than one longest name,
 # return the first of descending alphabetical order
@@ -122,10 +127,10 @@ def get_longest_name_id(table):
     for item in table:
         if len(item[1]) == name_lenght:
             name.append(item[1])
-    # bubble sort, hogy a listát rendezzük sort() nélkül; descending alphabetical: Z-A
+    # bubble sort, hogy a listát rendezzük sort() nélkül; descending alphabetical: A-Z
     for num in range(len(name)-1,0,-1):
         for i in range(num):
-            if name[i] < name[i+1]:
+            if name[i] > name[i+1]:
                 temp = name[i]
                 name[i] = name[i+1]
                 name[i+1] = temp
@@ -141,11 +146,14 @@ def get_longest_name_id(table):
 # return type: list of string (where string is like email+separator+name,
 # separator=";")
 def get_subscribed_emails(table):
-    subscribed_list = []
+    result_list = []
     for line in table:
-        if line[3] == "1":
-            subscribed_list.append(line[1])
-    return subscribed_list
-
-
+        subscribed = line[3]
+        if subscribed == "1":
+            email = line[2]
+            name = line[1]
+            result_item = email + ";" + name
+            result_list.append(result_item)
+    return result_list
+     
     pass
