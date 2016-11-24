@@ -101,7 +101,19 @@ def print_menu(title, list_options, exit_message):
 # @title: string - title of the "input section"
 # @inputs: list of string - list of the received values from the user
 # @type_list: list of strings - to pass it to the input handler
-def get_inputs(list_labels, title, type_list):
+def get_inputs(list_labels, title):
+    inputs = []
+    print(title)
+    while True:
+        inputs = []
+        for label in list_labels:
+            label = label + " : "
+            usr_in = input(label)
+            inputs.append(usr_in)
+        break
+    return inputs
+
+    def get_submenu_inputs(list_labels, title, type_list):
     msg = ''
     inputs = []
     print(title)

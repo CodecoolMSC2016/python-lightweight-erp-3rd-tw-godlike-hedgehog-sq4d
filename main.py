@@ -26,8 +26,7 @@ crm = SourceFileLoader("crm", main_path + "/crm/crm.py").load_module()
 
 
 def choose():
-    type_list = ["int"]
-    inputs = ui.get_inputs(["Please enter a number: "], "", type_list)
+    inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
         store.start_module()
