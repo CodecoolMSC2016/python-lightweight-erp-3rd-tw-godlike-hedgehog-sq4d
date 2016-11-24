@@ -124,7 +124,9 @@ def get_available_tools(table):
     year = 2016
     result_list =[]
     for nested_list in table:
-        if (int(nested_list[3])+int(nested_list[4]))>=year:
+        nested_list[3] = int(nested_list[3])
+        nested_list[4] = int(nested_list[4])
+        if nested_list[3]+nested_list[4]>=year:
             result_list.append(nested_list)
     return result_list
     pass

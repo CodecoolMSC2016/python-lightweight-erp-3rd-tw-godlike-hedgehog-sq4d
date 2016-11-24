@@ -25,7 +25,7 @@ common = SourceFileLoader(
 #
 def start_module():
     table = data_manager.get_table_from_file('hr/persons.csv')
-    title = 'Human Resources'
+    title = 'Human Resources Manager'
     tool_manager_options = ['Show table', 'Add', 'Remove', 'Update',
                             'Get oldest person', 'Get closest-to-average aged people']
     while True:
@@ -42,7 +42,7 @@ def start_module():
             inputs = inputs[0]
             remove(table, inputs)
         elif option == "4":
-            ist_labels = ['Add an id you want to update: ']
+            list_labels = ['Add an id you want to update: ']
             inputs = ui.get_inputs(list_labels,'')
             inputs = inputs[0]
             update(table, inputs)
@@ -80,6 +80,7 @@ def add(table):
     inputs = ui.get_inputs(list_labels, title)
     inputs.insert(0, id)
     table.append(inputs)
+    data_manager.write_table_to_file('faszomtudjami.csv', table)
 
     return table
 
