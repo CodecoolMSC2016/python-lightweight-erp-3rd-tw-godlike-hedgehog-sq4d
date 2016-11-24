@@ -1,5 +1,4 @@
 
-
 # This function needs to print outputs like this:
 # /-----------------------------------\
 # |   id   |      title     |  type   |
@@ -11,6 +10,8 @@
 #
 # @table: list of lists - the table to print out
 # @title_list: list of strings - the head of the table
+
+
 def print_table(table, title_list):
     # címsor oszlopainak szélessége
     len_title = []
@@ -101,14 +102,19 @@ def print_menu(title, list_options, exit_message):
 # @title: string - title of the "input section"
 # @inputs: list of string - list of the received values from the user
 def get_inputs(list_labels, title):
-
+    msg = ''
     inputs = []
     print(title)
-    for label in list_labels:
-        label = label + " : "
-        usr_in = input(label)
-        inputs.append(usr_in)
-
+    while True:
+        inputs = []
+        for label in list_labels:
+            label = label + " : "
+            usr_in = input(label)
+            inputs.append(usr_in)
+        print_error_message(input_handler(inputs))
+        msg = input_handler(inputs)
+        if msg == '':
+            break
     return inputs
 
 
@@ -116,7 +122,19 @@ def get_inputs(list_labels, title):
 #
 # @message: string - the error message
 def print_error_message(message):
+    print(message)
+    return
 
-    # your code
+# Gets a list of strings from @inputs and checks whether they exist or not.
+# They should, so it will either print out an error message and return to get_inputs() function or quit.
+# Haven't made up my mind yet.
 
-    pass
+
+def input_handler(inputs):
+    msg = ''
+    for entry in inputs:
+        if len(entry) <= 0:
+            msg = 'Wrong input format, please try again.'
+            return msg
+    msg = ''
+    return msg

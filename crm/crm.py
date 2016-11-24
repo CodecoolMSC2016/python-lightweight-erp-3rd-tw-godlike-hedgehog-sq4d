@@ -44,10 +44,9 @@ def start_module():
         elif option == "4":
             update(table, id_)
         elif option == "5":
-            get_lowest_price_item_id(table)
+            get_longest_name_id(table)
         elif option == "6":
-            get_items_sold_between(table, month_from, day_from,
-                                   year_from, month_to, day_to, year_to)
+            get_subscribed_emails(table)
         elif option == "0":
             break
 
@@ -59,9 +58,7 @@ def start_module():
 # @table: list of lists
 def show_table(table):
     title_list = ["id", "name", "email", "subscribed"]
-
     ui.print_table(table, title_list)
-
     pass
 
 
@@ -119,9 +116,24 @@ def update(table, id_):
 # return type: string (id) - if there are more than one longest name,
 # return the first of descending alphabetical order
 def get_longest_name_id(table):
-
-    # your code
-
+    name = []
+    # leghosszab len(name)
+    name_lenght = len(table[0][1])
+    for item in table:
+        if len(item[1]) == name_lenght:
+            name.append(item[1])
+    # bubble sort, hogy a listát rendezzük sort() nélkül; descending alphabetical: Z-A
+    for num in range(len(name)-1,0,-1):
+        for i in range(num):
+            if name[i] < name[i+1]:
+                temp = name[i]
+                name[i] = name[i+1]
+                name[i+1] = temp
+    # az id meghatározása
+    for line in table:
+        if name[0] == line[1]:
+            return (line[0])
+    
     pass
 
 
@@ -129,7 +141,11 @@ def get_longest_name_id(table):
 # return type: list of string (where string is like email+separator+name,
 # separator=";")
 def get_subscribed_emails(table):
+    subscribed_list = []
+    for line in table:
+        if line[3] == "1":
+            subscribed_list.append(line[1])
+    return subscribed_list
 
-    # your code
 
     pass
