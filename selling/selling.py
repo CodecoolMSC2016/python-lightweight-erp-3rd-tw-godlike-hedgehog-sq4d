@@ -29,7 +29,7 @@ common = SourceFileLoader(
 #
 def start_module():
     table = data_manager.get_table_from_file('selling/sellings.csv')
-    title = 'Tool manager'
+    title = 'Selling manager'
     tool_manager_options = ['Show table', 'Add', 'Remove',
                             'Update', 'Get cheapest item', 'Get sellings between dates']
     while True:
